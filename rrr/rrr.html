@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  /* Your existing styles */
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(90deg, rgb(3, 2, 22) 0%,
+     rgba(9,9,121,1) 21%, rgba(0,212,255,1) 100%);
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width:1000 px;
+    margin-top: 50px;
+    tab-size: 40px;
+  
+   
+  grid-auto-rows: 80px;
+
+  }
+  
+
+  .box {
+    background-color: #1d79b6;
+    color: white;
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .box:hover {
+    background-color: #2980b9;
+  }
+
+  .tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .box:hover .tooltip {
+    opacity: 1;
+  }
+
+  /* Additional styles for the new box */
+  .new-box {
+    background-color: #e74c3c;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: relative;
+    margin-top: 20px;
+    display: none; /* Initially hide the new box */
+    opacity: 0; /* Initially hide the new box */
+  }
+
+  .new-box.active {
+    display: block;
+    opacity: 1;
+    animation: fadeIn 0.01s ease-in-out forwards;
+  }
+
+  /* Keyframes for fading in the new box */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .next-box {
+    text-align: center;
+    margin-top: 10px;
+    color: #356280;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .next-box:hover {
+    color: #2980b9;
+  }
+</style>
+</head>
+<body>
+<div class="grid-container">
+  <div class="box" onclick="showNewBox(this)">
+    Click Me!
+    <div class="tooltip">Click to see a joke</div>
+    
+  </div>
+  <div class="box" onclick="showNewBox(this)">
+    Click Me!
+    <div class="tooltip">Click to see a joke</div>
+    
+  </div>
+  <div class="box" onclick="showNewBox(this)">
+    Click Me!
+    <div class="tooltip">Click to see a joke</div>
+    
+  </div>
+  <div class="box" onclick="showNewBox(this)">
+    Click Me!
+    <div class="tooltip">Click to see a joke</div>
+    
+  </div>
+  <div class="box" onclick="showNewBox(this)">
+    Click Me!
+    <div class="tooltip">Click to see a joke</div>
+    
+  </div>
+  <div class="box" onclick="showNewBox(this)">
+    Click Me!
+    <div class="tooltip">Click to see a joke</div>
+    
+  </div>
+  <div class="box" onclick="showNewBox(this)">
+    Click Me!
+    <div class="tooltip">Click to see a joke</div>
+    
+  </div>
+  <div class="box" onclick="showNewBox(this)">
+    Click Me!
+    <div class="tooltip">Click to see a joke</div>
+    
+  </div>
+  <div class="box" onclick="showNewBox(this)">
+    Click Me!
+    <div class="tooltip">Click to see a joke</div>
+    
+  </div>
+  <div class="box" onclick="showNewBox(this)">
+    Click Me!
+    <div class="tooltip">Click to see a joke</div>
+    
+  </div>
+  <div class="box" onclick="showNewBox(this)">
+    Click Me!
+    <div class="tooltip">Click to see a joke</div>
+    
+  </div>
+  <div class="box" onclick="showNewBox(this)">
+    Click Me!
+    <div class="tooltip">Click to see a joke</div>
+    
+  </div>
+
+  <!-- Add more box elements here -->
+</div>
+
+<div class="new-box" id="newBox">
+  <div id="jokeMessage">Loading...</div>
+  <div class="next-box" onclick="showNextJoke()">Next Joke</div>
+</div>
+
+<script>
+  // Array of jokes
+  const jokes = [
+    "Why don't scientists trust atoms? Because they make up everything!",
+    "Parallel lines have so much in common. It's a shame they'll never meet.",
+    "Why don't skeletons fight each other? They don't have the guts.",
+    "I used to play piano by ear, but now I use my hands."
+  ];
+
+  let currentIndex = 0;
+  let activeBox = null;
+
+  // Function to show a new box with a joke
+  function showNewBox(element) {
+    if (activeBox) {
+      activeBox.classList.remove("active");
+    }
+    activeBox = document.getElementById("newBox");
+    currentIndex = (currentIndex + 1) % jokes.length;
+    const jokeMessage = document.getElementById("jokeMessage");
+    jokeMessage.textContent = "Loading...";
+    setTimeout(() => {
+      jokeMessage.textContent = jokes[currentIndex];
+      activeBox.classList.add("active");
+    }, 2000); // Delay for 2 seconds
+  }
+
+  // Function to show the next joke
+  function showNextJoke() {
+    currentIndex = (currentIndex + 1) % jokes.length;
+    const jokeMessage = document.getElementById("jokeMessage");
+    jokeMessage.textContent = "Loading...";
+    setTimeout(() => {
+      jokeMessage.textContent = jokes[currentIndex];
+    }, 500);
+  }
+</script>
+</body>
+</html>
