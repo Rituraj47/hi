@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 600px;
+  }
+
+  .box {
+    background-color: #3498db;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .box:hover {
+    background-color: #2980b9;
+  }
+
+  .tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .box:hover .tooltip {
+    opacity: 1;
+  }
+
+  /* Your animation keyframes */
+  @keyframes bounce {
+    0%, to {
+      animation-timing-function: cubic-bezier(.8, 0, 1, 1);
+      transform: translateY(-25%);
+    }
+    50% {
+      animation-timing-function: cubic-bezier(0, 0, .2, 1);
+      transform: none;
+    }
+  }
+
+  @keyframes lds-facebook {
+    0% {
+      height: 64px;
+      top: 8px;
+    }
+    50%, to {
+      height: 32px;
+      top: 24px;
+    }
+  }
+
+  @keyframes lds-roller {
+    0% {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(1turn);
+    }
+  }
+</style>
+<script>
+  const jokes = [
+    "Why don't scientists trust atoms? Because they make up everything!",
+    "Parallel lines have so much in common. It's a shame they'll never meet.",
+    "Why don't skeletons fight each other? They don't have the guts.",
+    "I used to play piano by ear, but now I use my hands."
+  ];
+
+  const boxes = document.querySelectorAll(".box");
+  boxes.forEach((box, index) => {
+    box.addEventListener("click", () => {
+      const jokeIndex = index % jokes.length;
+      const tooltip = box.querySelector(".tooltip");
+      tooltip.innerText = jokes[jokeIndex];
+      tooltip.style.opacity = "1";
+      setTimeout(() => {
+        tooltip.style.opacity = "0";
+      }, 3000);
+    });
+  });
+</script>
+</head>
+<body>
+<div class="grid-container">
+  <div class="box">
+    Joke 1
+    <div class="tooltip"></div>
+  </div>
+  <div class="box">
+    Joke 2
+    <div class="tooltip"></div>
+  </div>
+  <div class="box">
+    Joke 3
+    <div class="tooltip"></div>
+  </div>
+  <div class="box">
+    Joke 4
+    <div class="tooltip"></div>
+  </div>
+  <!-- Add more boxes here -->
+</div>
+</body>
+</html>
